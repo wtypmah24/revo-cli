@@ -20,6 +20,11 @@
             <artifactId>picocli</artifactId>
             <version>4.7.7</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.4.1</version>
+        </dependency>
     </dependencies>
 
     <build>
