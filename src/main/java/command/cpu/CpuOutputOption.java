@@ -1,4 +1,4 @@
-package command;
+package command.cpu;
 
 public enum CpuOutputOption {
   INFO,

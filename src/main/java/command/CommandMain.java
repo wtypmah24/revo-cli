@@ -1,5 +1,6 @@
 package command;
 
+import command.cpu.CpuCommand;
 import picocli.CommandLine.Command;
 
 @Command(
