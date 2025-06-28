@@ -5,8 +5,6 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.Sensors;
 
-import java.util.concurrent.TimeUnit;
-
 public class CpuService {
   private final CentralProcessor processor;
   private final Sensors sensors;
@@ -38,15 +36,13 @@ public class CpuService {
     return processor.getProcessorIdentifier().getVendorFreq();
   }
 
-  public double[] getCpuLoadPerCore(int intervalSeconds) throws InterruptedException {
+  public double[] getCpuLoadPerCore() throws InterruptedException {
     var prevTicks = processor.getProcessorCpuLoadTicks();
-    TimeUnit.SECONDS.sleep(intervalSeconds);
     return processor.getProcessorCpuLoadBetweenTicks(prevTicks);
   }
 
-  public double getCpuLoadTotal(int intervalSeconds) throws InterruptedException {
+  public double getCpuLoadTotal() throws InterruptedException {
     var prevTicks = processor.getSystemCpuLoadTicks();
-    TimeUnit.SECONDS.sleep(intervalSeconds);
     return processor.getSystemCpuLoadBetweenTicks(prevTicks);
   }
 
