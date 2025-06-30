@@ -1,15 +1,15 @@
-package service.hardware;
+package info.hardware.cpu;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.Sensors;
 
-public class CpuService {
+public class Cpu {
   private final CentralProcessor processor;
   private final Sensors sensors;
 
-  public CpuService() {
+  public Cpu() {
     SystemInfo si = new SystemInfo();
     HardwareAbstractionLayer hal = si.getHardware();
     this.processor = hal.getProcessor();
@@ -52,5 +52,13 @@ public class CpuService {
 
   public double getCpuTemperature() {
     return sensors.getCpuTemperature(); // may return 0.0 if unsupported
+  }
+
+  public double cpuVoltage() {
+    return sensors.getCpuVoltage();
+  }
+
+  public int[] fanSpeeds() {
+    return sensors.getFanSpeeds();
   }
 }
