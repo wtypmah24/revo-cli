@@ -1,12 +1,12 @@
 package info.os;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import oshi.SystemInfo;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class OSProcessInfo {
   private final List<OSProcess> processes;
@@ -51,5 +51,28 @@ public class OSProcessInfo {
 
   public List<Long> getUpTimes() {
     return processes.stream().map(OSProcess::getUpTime).collect(Collectors.toList());
+  }
+
+  public List<ProcessInfoDto> getFilteredProcesses(Predicate<OSProcess> filter) {
+    return processes.stream().filter(filter).map(ProcessInfoDto::mapToDto).toList();
+  }
+
+  public List<ProcessInfoDto> getProcessesByName(List<String> nameFilters) {
+    if (nameFilters == null || nameFilters.isEmpty()) return List.of();
+
+    return getFilteredProcesses(
+        proc -> {
+          String name = proc.getName().toLowerCase();
+          String cmd = proc.getCommandLine().toLowerCase();
+          return nameFilters.stream()
+              .map(String::toLowerCase)
+              .anyMatch(f -> name.contains(f) || cmd.contains(f));
+        });
+  }
+
+  public List<ProcessInfoDto> getProcessesByPid(List<Integer> pids) {
+    if (pids == null || pids.isEmpty()) return List.of();
+
+    return getFilteredProcesses(proc -> pids.contains(proc.getProcessID()));
   }
 }

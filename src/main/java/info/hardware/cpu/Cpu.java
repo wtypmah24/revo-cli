@@ -38,11 +38,13 @@ public class Cpu {
 
   public double[] getCpuLoadPerCore() throws InterruptedException {
     var prevTicks = processor.getProcessorCpuLoadTicks();
+    Thread.sleep(500);
     return processor.getProcessorCpuLoadBetweenTicks(prevTicks);
   }
 
   public double getCpuLoadTotal() throws InterruptedException {
-    var prevTicks = processor.getSystemCpuLoadTicks();
+    long[] prevTicks = processor.getSystemCpuLoadTicks();
+    Thread.sleep(500);
     return processor.getSystemCpuLoadBetweenTicks(prevTicks);
   }
 

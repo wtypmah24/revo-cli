@@ -4,6 +4,8 @@ import handler.daemon.DaemonHandler;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.util.List;
+
 @Command(name = "daemon", description = "Manage system info daemon")
 public class DaemonCommand implements Runnable {
 
@@ -18,6 +20,14 @@ public class DaemonCommand implements Runnable {
 
   @Option(names = "--interval", description = "Logging interval in seconds", defaultValue = "10")
   private int interval;
+
+  @Option(
+      names = "--process-name",
+      description = "Match process by name or command (case-insensitive)")
+  private List<String> processNames;
+
+  @Option(names = "--pid", description = "Track specific PIDs")
+  private List<Integer> pids;
 
   @Option(names = "--run", hidden = true)
   private boolean run;

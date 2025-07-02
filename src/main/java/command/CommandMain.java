@@ -2,6 +2,7 @@ package command;
 
 import command.cpu.CpuCommand;
 import command.deamon.DaemonCommand;
+import command.deamon.DockerStatsCommand;
 import command.hwd.DiscCommand;
 import command.network.NetworkCommand;
 import command.os.OSServiceCommand;
@@ -23,7 +24,8 @@ import picocli.CommandLine.Command;
       OSProcessCommand.class,
       UsbCommand.class,
       OSServiceCommand.class,
-      DaemonCommand.class
+      DaemonCommand.class,
+      DockerStatsCommand.class
     })
 public class CommandMain implements Runnable {
   @Override
